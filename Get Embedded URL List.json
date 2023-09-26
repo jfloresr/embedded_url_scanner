@@ -1,0 +1,172 @@
+{
+  "name": "Get Embedded URL List",
+  "tasks": {
+    "3666": {
+      "name": "url_soup.py",
+      "canvasName": "url_soup.py",
+      "summary": "Shell Script url_soup.py",
+      "description": "Shell Script url_soup.py",
+      "location": "Application",
+      "locationType": null,
+      "app": "AGManager",
+      "type": "automatic",
+      "displayName": "AG Manager",
+      "variables": {
+        "incoming": {
+          "_hosts": "",
+          "url": "https://itential.com"
+        },
+        "outgoing": {
+          "stdout": ""
+        }
+      },
+      "actor": "Pronghorn",
+      "groups": [],
+      "nodeLocation": {
+        "x": -12,
+        "y": -132
+      }
+    },
+    "workflow_start": {
+      "name": "workflow_start",
+      "groups": [],
+      "nodeLocation": {
+        "x": -12,
+        "y": -264
+      },
+      "x": 0,
+      "y": 0.5
+    },
+    "workflow_end": {
+      "name": "workflow_end",
+      "groups": [],
+      "nodeLocation": {
+        "x": -12,
+        "y": 276
+      },
+      "x": 1,
+      "y": 0.5
+    },
+    "ab1a": {
+      "name": "query",
+      "canvasName": "query",
+      "summary": "Query Data Using 'json-query' Format",
+      "description": "Query data using a dot/bracket notation string and a matching key/value pair.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "operation",
+      "displayName": "WorkFlowEngine",
+      "variables": {
+        "incoming": {
+          "pass_on_null": false,
+          "query": "completed[0].response.stdout[0]",
+          "obj": "$var.3666.stdout"
+        },
+        "outgoing": {
+          "return_data": ""
+        }
+      },
+      "actor": "Pronghorn",
+      "groups": [],
+      "nodeLocation": {
+        "x": -12,
+        "y": 0
+      }
+    },
+    "abec": {
+      "name": "parse",
+      "canvasName": "parse",
+      "summary": "Parses a string to create an object.",
+      "description": "Parses a JSON string, constructing the JavaScript value or object described by the string.",
+      "location": "Application",
+      "locationType": null,
+      "app": "WorkFlowEngine",
+      "type": "automatic",
+      "displayName": "String",
+      "variables": {
+        "incoming": {
+          "text": "$var.ab1a.return_data"
+        },
+        "outgoing": {
+          "textObject": ""
+        }
+      },
+      "actor": "Pronghorn",
+      "groups": [],
+      "nodeLocation": {
+        "x": -12,
+        "y": 132
+      }
+    }
+  },
+  "transitions": {
+    "3666": {
+      "ab1a": {
+        "state": "success",
+        "type": "standard"
+      }
+    },
+    "workflow_start": {
+      "3666": {
+        "state": "success",
+        "type": "standard"
+      }
+    },
+    "workflow_end": {},
+    "ab1a": {
+      "abec": {
+        "state": "success",
+        "type": "standard"
+      }
+    },
+    "abec": {
+      "workflow_end": {
+        "state": "success",
+        "type": "standard"
+      }
+    }
+  },
+  "inputSchema": {
+    "type": "object",
+    "properties": {}
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "_id": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{24}$"
+      },
+      "initiator": {
+        "type": "string"
+      }
+    }
+  },
+  "canvasVersion": 3,
+  "type": "automation",
+  "font_size": 12,
+  "errorHandler": null,
+  "preAutomationTime": 0,
+  "sla": 0,
+  "outputData": {},
+  "lastUpdatedVersion": "5.46.0-2023.1.15.0",
+  "created_by": {
+    "provenance": "ldap",
+    "username": "admin@itential",
+    "firstname": "admin@itential",
+    "inactive": false
+  },
+  "createdVersion": "5.46.0-2023.1.15.0",
+  "last_updated": "2023-09-26T13:52:54.722Z",
+  "last_updated_by": {
+    "provenance": "ldap",
+    "username": "admin@itential",
+    "firstname": "admin@itential",
+    "inactive": false
+  },
+  "created": "2023-09-26T13:52:54.729Z",
+  "tags": [],
+  "groups": [],
+  "migrationVersion": 2
+}

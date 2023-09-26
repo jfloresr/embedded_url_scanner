@@ -1,0 +1,14 @@
+{
+    "properties": {
+      "url": {
+        "description": "URL to find links for",
+        "type": "string"
+      }
+    },
+    "required": [
+      "url"
+    ],
+    "script_argument_order": [
+      "url"
+    ]
+  }
